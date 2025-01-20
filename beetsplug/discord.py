@@ -37,7 +37,7 @@ class DiscordNotifier(BeetsPlugin):
                         },
                         {
                             "name": "Artist",
-                            "value": escape_markdown(album["artist"])
+                            "value": escape_markdown(album["albumartist"])
                         },
                         {
                             "name": "Track count",
