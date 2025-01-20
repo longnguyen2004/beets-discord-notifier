@@ -15,7 +15,7 @@ def escape_markdown(s: str):
 
 class DiscordNotifier(BeetsPlugin):
     def __init__(self):
-        super().__init__(name=None)
+        super().__init__(name="discord")
         self.config.add({
             "url": ""
         })
