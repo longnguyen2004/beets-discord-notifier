@@ -25,7 +25,7 @@ class DiscordNotifier(BeetsPlugin):
             raise ValueError("Webhook URL cannot be empty, please specify the URL")
 
     def send_message(self, lib: Library, album: Album):
-        body = []
+        body = {}
         message = {
             "content": "# New album",
             "embeds": [
@@ -51,9 +51,9 @@ class DiscordNotifier(BeetsPlugin):
         if (cover_path is not None):
             cover_path = Path(cover_path.decode())  # We pretend it's UTF-8
             file_name = cover_path.name
-            body.append((file_name, open(cover_path, mode='rb').read()))
+            body["files[0]"] = (file_name, open(cover_path, mode='rb').read())
             message["embeds"][0]["thumbnail"] = {
                 "url": f"attachment://{file_name}"
             }
-        body.insert(0, ("payload_json", json.dumps(message)))
+        body["payload_json"] = json.dumps(message)
         requests.post(self.webhook_url, files=body)
