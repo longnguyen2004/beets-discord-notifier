@@ -55,5 +55,5 @@ class DiscordNotifier(BeetsPlugin):
             message["embeds"][0]["thumbnail"] = {
                 "url": f"attachment://{file_name}"
             }
-        body["payload_json"] = json.dumps(message)
+        body["payload_json"] = (None, json.dumps(message))
         requests.post(self.webhook_url, files=body)
